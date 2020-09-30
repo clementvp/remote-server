@@ -5,6 +5,7 @@ const { ipcRenderer } = window;
 
 function App() {
   const [ipAddress, setIpAdress] = useState("remote");
+  const [name, setName] = useState("name");
   const [connectedUser, setConnectedUser] = useState(false);
 
   useEffect(() => {
@@ -13,7 +14,8 @@ function App() {
 
   useEffect(() => {
     ipcRenderer.on("back/ready", (event, data) => {
-      setIpAdress(data);
+      setIpAdress(data?.ip);
+      setName(data?.name);
     });
   }, []);
 
@@ -30,7 +32,7 @@ function App() {
   }, []);
 
   const [inputRef] = useQRCode({
-    text: ipAddress,
+    text: `${name}////${ipAddress}`,
     options: {
       type: "image/jpeg",
       quality: 0.3,
