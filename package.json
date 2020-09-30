@@ -2,16 +2,32 @@
   "name": "remote-client",
   "version": "0.1.0",
   "private": true,
+  "main": "electron/main.js",
+  "homepage": "./",
+  "build": {
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ]
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "internal-ip": "^6.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-qrcodes": "^1.0.7",
+    "react-scripts": "3.4.3",
+    "robotjs": "^0.6.0",
+    "socket.io": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "build-electron": "cp -r electron/. build/electron",
+    "start-electron": "env $(cat .env | grep -v \"#\" | xargs)  electron .",
+    "package-mac": "electron-builder build --mac -c.extraMetadata.main=build/electron/main.js",
+    "package-win": "electron-builder build --win -c.extraMetadata.main=build/electron/main.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -30,5 +46,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^9.2.1",
+    "electron-builder": "^22.8.0",
+    "electron-rebuild": "^2.0.0"
   }
 }
