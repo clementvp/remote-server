@@ -66,6 +66,10 @@ const socket = (mainWindow) => {
     socket.on("controls/left", () => {
       controls.left();
     });
+
+    socket.on("system/lock", () => {
+      controls.lock();
+    });
   });
 };
 
