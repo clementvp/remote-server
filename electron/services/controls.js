@@ -20,9 +20,7 @@ class Controls {
   lock() {
     if (process.platform === "darwin") {
       robot.keyTap("q", ["command", "control"]);
-    }
-
-    if (process.platform === "win32") {
+    } else {
       robot.keyTap("l", ["command"]);
     }
   }
