@@ -1,6 +1,7 @@
 const io = require("socket.io");
 const audio = require("./audio");
 const controls = require("./controls");
+const keyboard = require("./keyboard");
 const server = io.listen(9000);
 
 let user = false;
@@ -69,6 +70,10 @@ const socket = (mainWindow) => {
 
     socket.on("system/lock", () => {
       controls.lock();
+    });
+
+    socket.on("keyboard/char", (char) => {
+      keyboard.keypress(char);
     });
   });
 };
