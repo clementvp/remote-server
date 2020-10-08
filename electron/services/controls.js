@@ -1,5 +1,5 @@
 const robot = require("robotjs");
-
+const lockSystem = require("lock-system");
 class Controls {
   up() {
     robot.keyTap("up");
@@ -18,11 +18,7 @@ class Controls {
   }
 
   lock() {
-    if (process.platform === "darwin") {
-      robot.keyTap("q", ["command", "control"]);
-    } else {
-      robot.keyTap("l", ["command"]);
-    }
+    lockSystem();
   }
 }
 
